@@ -250,13 +250,17 @@ transferBtn.addEventListener("click", (e) => {
 
       //update UI
       updateUI(currentAccount)
+      
+      //reset timer
+      clearInterval(timer);
+      timer = LogoutTimerStart();
   }
 });
 
 loanBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
-  const amount = +(loanAmount.value);  
+  const amount = +loanAmount.value;
 
   // if (amount > 0 && currentAccount.transections.some(tran => tran >= amount * 0.8)) {
   if (amount >= 1 && currentAccount.balance > amount) {
@@ -266,10 +270,13 @@ loanBtn.addEventListener('click', (e) => {
     //Loan transaction date
     currentAccount.transectionDates.push(new Date());
 
-    updateUI(currentAccount)
-
+    updateUI(currentAccount);
   }
-  loanAmount.value = '';
+  loanAmount.value = "";
+
+  //reset timer
+  clearInterval(timer);
+  timer = LogoutTimerStart();
 })
 
 closeBtn.addEventListener('click', (e) => {
