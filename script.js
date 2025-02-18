@@ -151,7 +151,7 @@ const updateUI = function (acc) {
 };
 
 const LogoutTimerStart = () => {
-  let time = 10;
+  let time = 600;
 
   const timer = setInterval(
     () => {
