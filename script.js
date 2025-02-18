@@ -62,7 +62,7 @@ const loanBtn = document.querySelector(".form__btn--loan");
 const closeUser = document.querySelector(".form__input--user");
 const closePin = document.querySelector(".form__input--pin");
 const closeBtn = document.querySelector(".form__btn--close");
-const logouttimer = document.querySelector("timer");
+const logoutTimer = document.querySelector(".timer");
 
 const formatterTransectionDate = function (date) {
   const calcDayPassed = (tranDate, todayDate) => Math.round(Math.abs(todayDate - tranDate) / (1000 * 60 * 60 * 24));
@@ -150,6 +150,27 @@ const updateUI = function (acc) {
   calcCurrentSummary(acc);
 };
 
+const LogoutTimerStart = () => {
+  let time = 10;
+
+  const timer = setInterval(
+    () => {
+      const min = String(Math.trunc(time / 60)).padStart(2, 0);
+      const sec = String(time % 60).padStart(2, 0);
+      
+      logoutTimer.textContent = `${min}:${sec}`;
+      time--;
+
+      if(time === 0) {
+        clearInterval(timer);
+        welcomeText.textContent = `Log in to get started`;
+        appContainer.style.opacity = 0;
+      }
+
+  },1000);
+}
+
+
 let currentAccount;
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -190,6 +211,8 @@ loginBtn.addEventListener("click", (e) => {
 
     loginUser.value = loginPin.value = "";
     loginPin.blur();
+
+    LogoutTimerStart();
 
     const lsHistory = localStorage.getItem(currentAccount);
     // if (lsHistory != null) {
