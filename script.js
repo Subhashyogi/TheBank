@@ -170,10 +170,12 @@ const LogoutTimerStart = () => {
       time--;
 
   },1000);
+
+  return timer;
 }
 
 
-let currentAccount;
+let currentAccount, timer;
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -214,7 +216,8 @@ loginBtn.addEventListener("click", (e) => {
     loginUser.value = loginPin.value = "";
     loginPin.blur();
 
-    LogoutTimerStart();
+    if(timer) clearInterval(timer)
+    timer = LogoutTimerStart();
 
     const lsHistory = localStorage.getItem(currentAccount);
     // if (lsHistory != null) {
