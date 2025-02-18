@@ -271,12 +271,12 @@ loanBtn.addEventListener('click', (e) => {
     currentAccount.transectionDates.push(new Date());
 
     updateUI(currentAccount);
+
+    //reset timer
+    clearInterval(timer);
+    timer = LogoutTimerStart();
   }
   loanAmount.value = "";
-
-  //reset timer
-  clearInterval(timer);
-  timer = LogoutTimerStart();
 })
 
 closeBtn.addEventListener('click', (e) => {
