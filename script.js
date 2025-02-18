@@ -159,13 +159,15 @@ const LogoutTimerStart = () => {
       const sec = String(time % 60).padStart(2, 0);
       
       logoutTimer.textContent = `${min}:${sec}`;
-      time--;
+      
 
       if(time === 0) {
         clearInterval(timer);
         welcomeText.textContent = `Log in to get started`;
         appContainer.style.opacity = 0;
       }
+
+      time--;
 
   },1000);
 }
